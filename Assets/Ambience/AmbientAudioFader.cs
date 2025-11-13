@@ -28,7 +28,7 @@ public class AmbientAudioFader : MonoBehaviour
             return;
         }
 
-        // Ne asiguram ca nu porneste singur
+        // Nu porneste singur
         ambienceSource.playOnAwake = false;
 
         // Pornim cu volum 0

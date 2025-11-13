@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AirportExitTrigger : MonoBehaviour
 {
-    [Tooltip("Tag-ul playerului (XR Origin sau child cu collider).")]
+    [Tooltip("Tag-ul playerului (XR Origin).")]
     public string playerTag = "Player";
 
     [Tooltip("Referinta la AmbientAudioFader-ul care controleaza sunetul de aeroport.")]

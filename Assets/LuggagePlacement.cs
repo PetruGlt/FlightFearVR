@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class LuggagePlacement : MonoBehaviour
 {
-    [Tooltip("Tag-ul bagajului (cubul pe care il iei in mana).")]
+    [Tooltip("Tag-ul bagajului.")]
     public string luggageTag = "Luggage";
 
-    [Tooltip("Referinta la scriptul portii de securitate.")]
+    [Tooltip("Referinta la scriptul security gate-ului.")]
     public SecurityGate securityGate;
 
-    // tine minte bagajul care e in zona
+    // memoram bagajul care e in zona
     private Collider currentLuggage;
 
     private void OnTriggerEnter(Collider other)

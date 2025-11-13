@@ -3,13 +3,13 @@ using UnityEngine.Events;
 
 public class SecurityGate : MonoBehaviour
 {
-    [Tooltip("Tag-ul obiectului care reprezinta playerul (XR Origin sau child cu collider).")]
+    [Tooltip("Tag-ul obiectului care reprezinta playerul (XR Origin).")]
     public string playerTag = "Player";
 
-    [Tooltip("Colliderul care blocheaza fizic trecerea prin poarta (perete invizibil sau mesh-ul portii).")]
+    [Tooltip("Colliderul care blocheaza fizic trecerea prin poarta (perete invizibil).")]
     public Collider blockingCollider;
 
-    [Tooltip("Sunetul de beep care se reda cand playerul trece prin poarta.")]
+    [Tooltip("Sunetul care se reda cand playerul trece prin poarta.")]
     public AudioSource beepAudio;
 
     [Tooltip("Eveniment optional, apelat cand playerul trece prin poarta dupa ce a pus bagajul.")]
@@ -24,7 +24,7 @@ public class SecurityGate : MonoBehaviour
             blockingCollider.enabled = true;
     }
 
-    // este apelat din LuggagePlacement
+    // apelat din LuggagePlacement
     public void SetLuggagePlaced(bool value)
     {
         luggagePlaced = value;
