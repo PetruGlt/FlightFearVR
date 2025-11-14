@@ -8,6 +8,10 @@ public class LuggagePlacement : MonoBehaviour
     [Tooltip("Referinta la scriptul security gate-ului.")]
     public SecurityGate securityGate;
 
+    [Header("Sounds")]
+    [Tooltip("Sound played when luggage is placed correctly.")]
+    public AudioSource allowSound;
+
     // memoram bagajul care e in zona
     private Collider currentLuggage;
 
@@ -17,6 +21,9 @@ public class LuggagePlacement : MonoBehaviour
         {
             Debug.Log("Bagaj plasat corect.");
             currentLuggage = other;
+
+            if (allowSound != null)
+                allowSound.Play();
 
             if (securityGate != null)
             {

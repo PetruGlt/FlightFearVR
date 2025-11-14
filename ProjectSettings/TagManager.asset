@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Luggage
+  - Passport
+  - Guard
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class SecurityGate : MonoBehaviour
 {
+    public CountdownTimer countdownTimer;
+
     [Tooltip("Tag-ul obiectului care reprezinta playerul (XR Origin).")]
     public string playerTag = "Player";
 
@@ -14,6 +16,10 @@ public class SecurityGate : MonoBehaviour
 
     [Tooltip("Eveniment optional, apelat cand playerul trece prin poarta dupa ce a pus bagajul.")]
     public UnityEvent onPlayerPassedWithLuggage;
+
+    [Tooltip("Textul 'LOCKED' care apare cand usa este blocata.")]
+    public GameObject lockedText;
+
 
     private bool luggagePlaced = false;
 
@@ -31,9 +37,11 @@ public class SecurityGate : MonoBehaviour
 
         if (blockingCollider != null)
         {
-            // daca bagajul e pus, dezactivam colliderul care blocheaza trecerea
+            // daca bagajul e pus, dezactivam colliderul care blocheaza trecerea si textul LOCKED
             blockingCollider.enabled = !luggagePlaced;
+            lockedText.SetActive(!luggagePlaced);
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +54,9 @@ public class SecurityGate : MonoBehaviour
 
             if (beepAudio != null)
                 beepAudio.Play();
-
+                
+            if (countdownTimer != null)
+                countdownTimer.StartTimer();
 
             onPlayerPassedWithLuggage?.Invoke();
         }
