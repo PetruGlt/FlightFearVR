@@ -29,7 +29,6 @@ public class PassengerAI : MonoBehaviour
             }
         }
 
-        // Pornim la drum
         GoToRandomPoint();
     }
 
@@ -74,7 +73,7 @@ public class PassengerAI : MonoBehaviour
         int randomIndex = Random.Range(0, waypoints.Count);
         agent.SetDestination(waypoints[randomIndex].position);
         
-        isWaiting = false; // Nu mai asteptam
+        isWaiting = false; 
 
         // --- SCHIMBARE ANIMATIE: WALK ---
         if (animator != null)

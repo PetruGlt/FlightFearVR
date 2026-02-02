@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowPlayerBody : MonoBehaviour
 {
     [Header("Referinte")]
-    [SerializeField] private Transform cameraTransform; // Trage aici Main Camera din XR Origin
+    [SerializeField] private Transform cameraTransform; // Main Camera din XR Origin
 
     [Header("Setari Pozitionare")]
     [SerializeField] private float distance = 0.6f;      // Distanta in fata (metri)
