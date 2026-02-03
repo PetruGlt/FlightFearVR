@@ -21645,7 +21645,7 @@ MonoBehaviour:
   agentDialogueText: {fileID: 789063123}
   npcAnimator: {fileID: 0}
   checkTime: 5
-  nextSceneName: Scene_Airplane
+  nextSceneName: Airplane
 --- !u!1 &1257463002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3281755754987455352, guid: 2a706093cdcc8d24f8b31d830f678399, type: 3}

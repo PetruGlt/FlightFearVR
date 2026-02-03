@@ -134,6 +134,7 @@ MonoBehaviour:
   seatPosition: {fileID: 5432887630169312064}
   playerTag: Player
   mainCamera: {fileID: 0}
+  seatCameraOffset: {x: 0, y: 0, z: 0}
   planeTransform: {fileID: 6781107896573341503}
   planeMovement: {fileID: 8267929958288523116}
   locomotionComponents: []
@@ -378,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 72cadb5c81487f14db9b1a46c8ac52e3, type: 3}
       propertyPath: m_Name
-      value: aircraft_with_passenger_interior_vr_scaled (1)
+      value: aircraft 2
       objectReference: {fileID: 0}
     - target: {fileID: 8372087838892240638, guid: 72cadb5c81487f14db9b1a46c8ac52e3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -645,11 +646,14 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 30
   accelerationRate: 2
+  landingSpeed: 10
   takeoffSpeed: 50
   takeoffAngle: 15
   altitudeForTransition: 100
   nextSceneName: FlyingOverCity
   fadeToBlackDuration: 2
+  shouldLandInsteadOfTakeoff: 0
+  seatCameraOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &6354731871310940337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 117487484315844709, guid: 72cadb5c81487f14db9b1a46c8ac52e3, type: 3}
