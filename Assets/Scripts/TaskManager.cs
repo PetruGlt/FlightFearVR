@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; // Sau UnityEngine.UI daca folosesti text simplu
+using TMPro; 
 
 public class TaskManager : MonoBehaviour
 {
@@ -28,10 +28,9 @@ public class TaskManager : MonoBehaviour
     // Aceasta e functia pe care o vom striga din alte scripturi
     public void CompleteCurrentTask()
     {
-        // Trecem la urmatorul index
         currentTaskIndex++;
         
-        // Sunet de succes (optional)
+        // Sunet de succes 
         // AudioSource.PlayClipAtPoint(successClip, transform.position);
 
         UpdateUI();

@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
- // Namespace-ul standard
 
-// Daca ai eroare la linia de mai sus, sterge-o si scrie: 
 // using UnityEngine.XR.Interaction.Toolkit.Interactables; 
 
 public class AdvancedInventorySystem : MonoBehaviour
@@ -75,7 +73,7 @@ public class AdvancedInventorySystem : MonoBehaviour
         GameObject candidate = physicalItems[index];
         UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable grabScript = cachedGrabScripts[index]; // Luam direct din lista salvata
 
-        // CAZUL 1: VREI SA IL PUI LA LOC (STASH)
+        // CAZUL 1: STASH
         if (isItemOut[index])
         {
             bool isHolding = false;
@@ -97,7 +95,7 @@ public class AdvancedInventorySystem : MonoBehaviour
             return; 
         }
 
-        // CAZUL 2: VREI SA IL SCOTI (SUMMON)
+        // CAZUL 2: SUMMON
         if (currentEquippedItem != null && currentEquippedItem != candidate)
         {
             Rigidbody rbOld = currentEquippedItem.GetComponent<Rigidbody>();
@@ -116,7 +114,7 @@ public class AdvancedInventorySystem : MonoBehaviour
         if (rb != null)
         {
             rb.useGravity = false;
-            // Fix simplu pentru viteza
+            // Fix pentru viteza
             rb.linearVelocity = Vector3.zero; 
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
@@ -191,5 +189,60 @@ public class AdvancedInventorySystem : MonoBehaviour
             if (physicalItems[i] == item) return i;
         }
         return -1;
+    }
+
+    public void AddItemToSlot(int slotIndex, GameObject itemPrefab)
+    {
+
+        if (slotIndex < 0 || slotIndex >= physicalItems.Length)
+        {
+            Debug.LogError($"[Inventory] Index invalid: {slotIndex}. Sloturile sunt de la 0 la {physicalItems.Length - 1}");
+            return;
+        }
+
+        if (itemPrefab == null)
+        {
+            Debug.LogError("[Inventory] Prefab-ul trimis este NULL!");
+            return;
+        }
+
+        GameObject newItem = Instantiate(itemPrefab);
+        newItem.name = itemPrefab.name; 
+        newItem.SetActive(false);      
+
+       
+        physicalItems[slotIndex] = newItem;
+        isItemOut[slotIndex] = false;
+
+        
+        var grabScript = newItem.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable>();
+        if (grabScript == null) grabScript = newItem.GetComponentInChildren<UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable>();
+
+        if (grabScript != null)
+        {
+           
+            if (slotIndex < cachedGrabScripts.Count)
+            {
+                cachedGrabScripts[slotIndex] = grabScript;
+            }
+            else
+            {
+                cachedGrabScripts.Add(grabScript);
+            }
+
+            grabScript.selectExited.RemoveAllListeners(); 
+            grabScript.selectEntered.RemoveAllListeners();
+
+            grabScript.selectExited.AddListener((args) => OnItemDropped(slotIndex, newItem));
+            grabScript.selectEntered.AddListener((args) => OnItemGrabbed(newItem));
+
+            Debug.Log($"[Inventory] Slotul {slotIndex} a fost actualizat cu succes cu {newItem.name}!");
+        }
+        else
+        {
+            Debug.LogError($"[Inventory] Obiectul {newItem.name} nu are XRGrabInteractable! Inventarul nu îl va putea controla.");
+        }
+
+        UpdateUI(slotIndex);
     }
 }

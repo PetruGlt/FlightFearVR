@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class VRToolbarManager : MonoBehaviour
 {
-    public GameObject[] itemsInHand; // Trage aici obiectele tale (Pașaport, etc.)
-    public InputActionProperty changeItemAction; // Mapare pentru buton/joystick
+    public GameObject[] itemsInHand; // Pasaport, etc.
+    public InputActionProperty changeItemAction; 
     private int currentIndex = 0;
 
     void Start()
@@ -17,7 +17,7 @@ public class VRToolbarManager : MonoBehaviour
 
     void Update()
     {
-        // Verificăm dacă jucătorul a apăsat butonul de schimbare
+        // Verificam daca jucatorul a apasat butonul de schimbare
         // Adaugam verificare: "itemsInHand" nu trebuie sa fie null si trebuie sa aiba elemente
         if (changeItemAction.action != null && changeItemAction.action.WasPressedThisFrame())
         {

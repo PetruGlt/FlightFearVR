@@ -7,7 +7,7 @@ public class SecurityBelt : MonoBehaviour
     public float speed = 0.8f;   
     
     [Header("Security Logic")]
-    public GameObject barrierToOpen; // TRAGE AICI OBIECTUL "Security_Barrier"
+    public GameObject barrierToOpen; // "Security_Barrier"
 
     [Header("Debug")]
     [SerializeField] private GameObject currentItem = null; 

@@ -1,24 +1,29 @@
 using UnityEngine;
-using UnityEngine.UI; // Sau TMPro daca folosesti TextMeshPro
+using UnityEngine.UI; 
 using System.Collections;
 
 public class CheckInManager : MonoBehaviour
 {
     [Header("Configurare")]
-    public Transform luggageEndPoint; // Trage obiectul "Luggage_EndPoint" aici
-    public Text agentDialogueText;    // Trage textul de deasupra capului NPC-ului
+    public Transform luggageEndPoint; // obiectul "Luggage_EndPoint" aici
+    public Text agentDialogueText;    // textul de deasupra capului NPC-ului
     public float beltSpeed = 0.5f;
     public float waitTime = 2.0f;
 
     [Header("Setari Nume")]
-    // Cum se numesc obiectele tale in Hierarchy? (Scrie o parte din nume)
+    // Cum se numesc obiectele in Hierarchy? (o parte din nume)
     public string passportKeyword = "Passport"; 
     public string luggageKeyword = "Travel";      
 
+    [Header("Info Zbor (Pentru UI)")]
+    // Acestea sunt doar informatii pe care le afisam pe ecran
+    public string assignedGate = "04";   
+    public string assignedSeat = "12A";
+    
     // Starea sistemului
     private bool isPassportVerified = false;
     private bool isLuggageWeighed = false;
-    private bool hasGreeted = false; // Tine minte daca ne-a salutat deja
+    private bool hasGreeted = false; // Tine minte daca a salutat deja
     private GameObject currentLuggage = null;
 
     void Start()
@@ -28,24 +33,24 @@ public class CheckInManager : MonoBehaviour
 
     public void OnPlayerApproach(Collider other)
     {
-        // Daca ne-a salutat deja, nu mai zice nimic
+        // Daca a salutat deja, nu mai zice nimic
         if (hasGreeted) return;
 
         // Verificam daca cel care a intrat este Jucatorul
         // (Verificam Tag-ul "Player" sau daca numele contine "Player"/"Camera"/"Body")
         if (other.CompareTag("Player") || other.name.Contains("Player") || other.name.Contains("Head") || other.name.Contains("Body"))
         {
-            UpdateDialogue("Bună ziua! Vă rog să prezentați pașaportul.");
-            hasGreeted = true; // Gata, am salutat
+            UpdateDialogue("Buna ziua! Va rog sa prezentati pasaportul.");
+            hasGreeted = true; 
         }
     }
 
     // --- FUNCTIILE APELATE DE TRIGGERE ---
 
-    // Legam asta de Trigger_Passport
+    // Trigger_Passport
     public void OnPassportZoneEnter(Collider other)
     {
-        if (isPassportVerified) return; // Daca e gata, ignoram
+        if (isPassportVerified) return; 
 
         // Verificam daca obiectul pus e pasaportul
         if (other.name.Contains(passportKeyword)) 
@@ -54,17 +59,16 @@ public class CheckInManager : MonoBehaviour
         }
     }
 
-    // Legam asta de Trigger_Scale
+    // Trigger_Scale
     public void OnScaleZoneEnter(Collider other)
     {
-        // Nu primim bagajul daca nu am verificat pasaportul
         if (!isPassportVerified)
         {
-            UpdateDialogue("Vă rog întâi pașaportul!");
+            UpdateDialogue("Va rog intai pasaportul!");
             return;
         }
 
-        if (isLuggageWeighed) return; // Deja luat
+        if (isLuggageWeighed) return; 
 
         // Verificam daca e bagajul
         if (other.name.Contains(luggageKeyword) && currentLuggage == null)
@@ -81,35 +85,34 @@ public class CheckInManager : MonoBehaviour
 
     IEnumerator VerifyPassportRoutine()
     {
-        UpdateDialogue("Verific... O secundă.");
-        // Asteptam 3 secunde (simulam tastatul la calculator)
+        UpdateDialogue("Verific... O secunda.");
+        
         yield return new WaitForSeconds(waitTime); 
 
         isPassportVerified = true;
-        UpdateDialogue("Totul în regulă. Vă rog puneți bagajul pe cântar.");
+        UpdateDialogue("Totul in regula. Va rog puneti bagajul pe cantar.");
     }
 
     IEnumerator WeighLuggageRoutine()
     {
-        UpdateDialogue("Cântăresc...");
+        UpdateDialogue("Cantaresc...");
         
-        // Oprim fizica bagajului ca sa stea cuminte pe cantar
+        // Oprim fizica bagajului 
         Rigidbody rb = currentLuggage.GetComponent<Rigidbody>();
         if(rb != null) 
         {
-            rb.isKinematic = true;
-            // Fix Unity 6 velocity warning
-            rb.angularVelocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;        // 1. viteza
+            rb.angularVelocity = Vector3.zero; // 2. rotatia
+            rb.isKinematic = true;             // 3. Kinematic (blocat)
         }
 
         yield return new WaitForSeconds(waitTime);
 
-        // Calculam o greutate random pentru realism
         float weight = Random.Range(18.5f, 22.0f);
         UpdateDialogue($"Greutate: {weight:F1} kg. Perfect! Drum bun!");
 
         yield return new WaitForSeconds(waitTime);
-        isLuggageWeighed = true; // Asta declanseaza miscarea in Update
+        isLuggageWeighed = true; 
     }
 
     void Update()
@@ -124,15 +127,19 @@ public class CheckInManager : MonoBehaviour
             if (Vector3.Distance(currentLuggage.transform.position, luggageEndPoint.position) < 0.1f)
             {
                 Destroy(currentLuggage); 
-                UpdateDialogue("Următorul pasager!");
+                UpdateDialogue("Urmatorul pasager!");
 
-                // --- AICI ESTE MODIFICAREA ---
+
+                if (FlightHUD.Instance != null)
+                {
+                    FlightHUD.Instance.ShowFlightInfo(assignedGate, assignedSeat);
+                }
+
                 // Dupa ce bagajul a plecat, task-ul e gata
                 if (TaskManager.Instance != null)
                 {
                     TaskManager.Instance.CompleteCurrentTask();
                 }
-                // -----------------------------
             }
         }
     }
