@@ -14,6 +14,12 @@ public class XRDebugLocomotion : MonoBehaviour
 
     private void Update()
     {
+        // Don't do anything if this script is disabled
+        if (!enabled) return;
+        
+        // Don't do anything if controller is disabled
+        if (controller == null || !controller.enabled) return;
+        
         // WASD / Arrow keys
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
