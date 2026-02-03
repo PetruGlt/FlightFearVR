@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 806451919}
     m_Modifications:
+    - target: {fileID: 1531289768747236046, guid: 9c6ece83dbc8b6b418fd169b9f5f1cf8, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1651131699203203770, guid: 9c6ece83dbc8b6b418fd169b9f5f1cf8, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -649,6 +653,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 530808980}
     m_Modifications:
+    - target: {fileID: 171032777061573579, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
+      propertyPath: m_TurnSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1117918013237801366, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -761,6 +769,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3387592216807852698, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5533131550226940680, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -785,6 +797,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6053068223827827309, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6541301446242056136, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -807,6 +823,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6541301446242056136, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487620734661678110, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8797998950061719027, guid: 8340f4772f1a830419eb00cdb9287e5a, type: 3}

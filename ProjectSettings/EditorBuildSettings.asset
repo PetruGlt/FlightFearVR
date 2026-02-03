@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Airport.unity
     guid: d881040efed6ea24ab5dfd7e7aabcd41
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Airport_VR.unity
     guid: 74b5ed6315ed7624a894529de47a575f
   - enabled: 1
