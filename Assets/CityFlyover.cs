@@ -5,10 +5,10 @@ public class CityFlyover : MonoBehaviour
 {
     [Header("Flight Settings")]
     public float flySpeed = 30f;
-    public float flightDuration = 30f; // 30 seconds over city
+    public float flightDuration = 5f; // 5 seconds over city
     
     [Header("Scene Transition")]
-    public string airportSceneName = "Airport"; // Name of airport scene
+    public string airportSceneName = "Airport_VR"; // Name of airport scene
     public float fadeToBlackDuration = 2f;
     
     [Header("Optional")]
@@ -42,25 +42,33 @@ public class CityFlyover : MonoBehaviour
     
     System.Collections.IEnumerator FadeAndReturnToAirport()
     {
+        Debug.Log("Switching Global Brain to LANDING MODE...");
+
+        // Set our static variable to true
+        FlightManager.isReturningForLanding = true;
+
+        // Brief pause to ensure the logic registers (optional)
+        yield return new WaitForSeconds(0.1f);
+
         Debug.Log("Starting fade to black...");
-        
+
         // Create a black overlay UI
         GameObject fadeCanvas = new GameObject("FadeCanvas");
         Canvas canvas = fadeCanvas.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.sortingOrder = 999;
-        
+
         GameObject fadePanel = new GameObject("FadePanel");
         fadePanel.transform.SetParent(fadeCanvas.transform);
         UnityEngine.UI.Image img = fadePanel.AddComponent<UnityEngine.UI.Image>();
         img.color = new Color(0, 0, 0, 0);
-        
+
         RectTransform rt = fadePanel.GetComponent<RectTransform>();
         rt.anchorMin = Vector2.zero;
         rt.anchorMax = Vector2.one;
         rt.offsetMin = Vector2.zero;
         rt.offsetMax = Vector2.zero;
-        
+
         // Fade to black
         float elapsed = 0f;
         while (elapsed < fadeToBlackDuration)
@@ -70,9 +78,9 @@ public class CityFlyover : MonoBehaviour
             img.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
-        
+
         img.color = Color.black;
-        
+
         Debug.Log($"Loading scene: {airportSceneName}");
         
         // Try loading the scene

@@ -41,12 +41,12 @@ public class PlaneMovement : MonoBehaviour
         currentSpeed = moveSpeed;
         
         // Check if we're returning from the city
-        if (PlayerPrefs.GetInt("ReturningFromCity", 0) == 1)
+        if (FlightManager.isReturningForLanding)
         {
             shouldLandInsteadOfTakeoff = true;
             isReverseLanding = true;
-            PlayerPrefs.SetInt("ReturningFromCity", 0); // Reset
-            PlayerPrefs.Save();
+            //PlayerPrefs.SetInt("ReturningFromCity", 0); // Reset
+            //PlayerPrefs.Save();
             
             // Start clean landing sequence with fade
             StartCoroutine(LandingSequenceWithFade());
@@ -306,7 +306,9 @@ public class PlaneMovement : MonoBehaviour
                 {
                     isMoving = false;
                     Debug.Log("Landing complete! Re-enabling player controls.");
-                    
+
+                    FlightManager.isReturningForLanding = false;
+
                     // Re-enable player controls after landing
                     GameObject playerRig = null;
                     try { playerRig = GameObject.FindGameObjectWithTag("Player"); }
