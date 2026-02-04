@@ -6,23 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/Airplane.unity
-    guid: 650fe71b29db4264c865c5a6c7a6ac0d
-  - enabled: 0
-    path: Assets/Scenes/Airport.unity
-    guid: d881040efed6ea24ab5dfd7e7aabcd41
+    path: Assets/Scenes/Airport_VR.unity
+    guid: 74b5ed6315ed7624a894529de47a575f
   - enabled: 1
     path: Assets/Scenes/Airplane_VR.unity
-    guid: 3d9df60d84fca13458f5357292034316
+    guid: 1e5d593aea00b774db141841c84041b2
   - enabled: 1
     path: Assets/Scenes/FlyingOverCity.unity
     guid: 55be70eb14ae2fa439b25ccca56951e2
-  - enabled: 1
-    path: Assets/Scenes/Airport_VR.unity
-    guid: 74b5ed6315ed7624a894529de47a575f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1d419aacac9d0eb47960ae40e50de7a4, type: 2}
