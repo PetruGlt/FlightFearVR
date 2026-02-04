@@ -8,7 +8,7 @@ public class CityFlyover : MonoBehaviour
     public float flightDuration = 5f; // 5 seconds over city
     
     [Header("Scene Transition")]
-    public string airportSceneName = "Airport_VR"; // Name of airport scene
+    public string airportSceneName = "Airplane_VR"; // Name of airport scene
     public float fadeToBlackDuration = 2f;
     
     [Header("Optional")]

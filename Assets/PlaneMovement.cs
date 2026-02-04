@@ -35,6 +35,8 @@ public class PlaneMovement : MonoBehaviour
     [Header("Seat Placement (Landing)")]
     [Tooltip("Optional offset applied when snapping the camera to the seat on landing. Use Y = -0.05 or -0.10 if too high.")]
     public Vector3 seatCameraOffset = Vector3.zero;
+
+    public GameObject panelObj;
     
     void Start()
     {
@@ -307,7 +309,13 @@ public class PlaneMovement : MonoBehaviour
                     isMoving = false;
                     Debug.Log("Landing complete! Re-enabling player controls.");
 
+                    if (panelObj != null) panelObj.SetActive(true);
+
                     FlightManager.isReturningForLanding = false;
+
+                    var audio = GetComponent<PlaneAudioController>();
+                    if (audio != null)
+                        audio.PlayLandingSequence();
 
                     // Re-enable player controls after landing
                     GameObject playerRig = null;
@@ -426,6 +434,11 @@ public class PlaneMovement : MonoBehaviour
         isMoving = true;
         currentWaypointIndex = 0;
         currentSpeed = moveSpeed;
+
+        var audio = GetComponent<PlaneAudioController>();
+        if (audio != null)
+            audio.PlayTakeOff();
+
         Debug.Log("Plane movement started!");
     }
     
